@@ -7,7 +7,26 @@ Show how to create flutter ui , material google ui , apple ui and hottest flutte
 
 command : flutter create --org com.future --description "Flutter Future UI Show" --platforms=ios,android flutter_ui
 
+
+## Dev record
+20250813 : Create project , 70% buttons is created.
+
 ## AI Plan
+总体思路（只做 Android 包，能浏览组件 + 一键看源码）
+形态：一个“组件画廊（Gallery）”App，左侧/顶部为分类导航，右侧为示例页；每个示例页都有「查看源码」按钮。
+
+数据驱动：所有示例通过注册表统一登记（分类、难度、标签、路由、源码路径），主页自动生成目录。
+
+跨平台风格：
+
+Material 3（Android 最新风格）——用 material 体系。
+
+iOS 风格——用 cupertino + 自定义样式去视觉复刻（即使只打 Android 包）。
+
+第三方热门插件的 UI 组件——以“常见场景 Demo”为主（如图表、骨架屏、动画、轮播、下拉刷新）。
+
+源码查看：示例页面右上角按钮弹出 BottomSheet，内置代码高亮，支持复制、跳 GitHub 链接。
+
 阶段 1：基础 & 布局（P0）
 
 文本 Text/RichText，按钮 Filled/Elevated/Outlined/IconButton
@@ -85,3 +104,5 @@ SearchBar/SearchAnchor、Filled/Outlined TextField 对比
 M3 动效参数（Easing/Duration）与动效示例
 
 动态色取色流程（运行时切换预设色板）
+
+
