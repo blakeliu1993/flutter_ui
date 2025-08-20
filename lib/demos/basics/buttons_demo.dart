@@ -1,37 +1,12 @@
-// FilledButton - 填充按钮（Material 3 新增）
-// FilledButton.tonal - 色调填充按钮
-// FilledButton.icon - 带图标的填充按钮
-// FilledButton.tonalIcon - 带图标的色调填充按钮
-// OutlinedButton - 标准边框按钮
-// OutlinedButton.icon - 带图标的边框按钮
-// TextButton - 标准文本按钮
-// TextButton.icon - 带图标的文本按钮
-// ElevatedButton - 标准浮动按钮
-// ElevatedButton.icon - 带图标的浮动按钮
-// IconButton - 标准图标按钮
-// IconButton.filled - 填充图标按钮
-// IconButton.outlined - 边框图标按钮
-// ToggleButtons - 切换按钮组
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/core/demo_models.dart';
 import 'package:flutter_ui/core/widgets/demo_scaffold.dart';
 import 'package:flutter_ui/utils/constantvalue.dart';
 import 'package:flutter_ui/utils/showtoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/cupertino.dart';
 
 const _src = "";
-
-///DropdownButton - 下拉按钮
-///
-///
-// PopupMenuButton - 弹出菜单按钮
-// FloatingActionButton - 浮动操作按钮
-// FloatingActionButton - 标准浮动操作按钮
-// FloatingActionButton.extended - 扩展浮动操作按钮
-// BackButton - 返回按钮
-// CloseButton - 关闭按钮
-// ExpandIcon - 展开图标按钮
 
 class ButtonExample extends StatefulWidget {
   const ButtonExample({super.key});
@@ -44,6 +19,13 @@ class _ButtonExampleState extends State<ButtonExample> {
   int count = 0;
   List<bool> isToggleSelected = [false, false, false, false];
   String _dropdownValue = "item0";
+  List<Icon> popupMenuIcons = [
+    const Icon(Icons.add),
+    const Icon(Icons.remove),
+    const Icon(Icons.close),
+    const Icon(Icons.settings),
+  ];
+  Widget _selectedIcon = Icon(Icons.add);
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -312,6 +294,95 @@ class _ButtonExampleState extends State<ButtonExample> {
             HintMsgWidget(
               msg:
                   "DropdownButtonHideUnderline 是一个包装器组件，用于隐藏 DropdownButton 的默认下划线。",
+            ),
+          ],
+        ),
+        const Divider(color: Colors.pink),
+        PopupMenuButton(
+          itemBuilder: (context) {
+            return popupMenuIcons
+                .map(
+                  (e) => PopupMenuItem(
+                    onTap: () {
+                      setState(() {
+                        _selectedIcon = e;
+                      });
+                    },
+                    child: e,
+                  ),
+                )
+                .toList();
+          },
+          icon: _selectedIcon,
+          tooltip: "Popup Menu",
+          color: Colors.red.withAlpha(0.3 * 255 ~/ 1),
+          iconColor: Colors.amber,
+          enableFeedback: true,
+          position: PopupMenuPosition.over,
+        ),
+        const Divider(color: Colors.blue),
+        FloatingActionButton(
+          onPressed: () {
+            ShowToast.toast(
+              "FAB用于呈现应用的主要功能或最常用的操作，通常是页面的核心功能。例如，在聊天应用中用于新建消息，在邮件应用中用于撰写新邮件。",
+              '''数量限制：Google Material Design指南建议每个屏幕只使用一个FAB，避免造成用户困扰。
+位置限制：FAB通常固定在屏幕的特定位置（如右下角），不能随意放置。''',
+            );
+          },
+
+          shape: CircleBorder(),
+          child: Icon(Icons.add_outlined),
+        ),
+
+        const Divider(color: Colors.cyan),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            BackButton(
+              color: Colors.deepOrange,
+              onPressed: () => ShowToast.toast(
+                "Should go back , but this one only show msg ",
+                "which is useful if you need to create a back buttonthat responds differently to being pressed.",
+              ),
+            ),
+            CloseButton(
+              color: Colors.greenAccent,
+              onPressed: () => ShowToast.toast(
+                "Should close , but this one only show msg ",
+                "Use a [CloseButton] instead of a [BackButton] on fullscreen dialogs orpages that may solicit additional actions to close.",
+              ),
+            ),
+          ],
+        ),
+        const Divider(color: Colors.indigo),
+        Wrap(
+          children: [
+            CupertinoButton(
+              onPressed: () {
+                ShowToast.toast(
+                  "This is a IOS style button",
+                  "An iOS-style button.Takes in a text or an icon that fades out and in on touch. May optionally have abackground.",
+                );
+              },
+              child: Text("CupertinoButton"),
+            ),
+            CupertinoButton.filled(
+              child: Text("CupertinoButton.filled"),
+              onPressed: () {
+                ShowToast.toast(
+                  "This is a IOS style button",
+                  "Creates an iOS-style button with a filled background.",
+                );
+              },
+            ),
+            CupertinoButton.tinted(
+              child: Text("CupertinoButton.tinted"),
+              onPressed: () {
+                ShowToast.toast(
+                  "This is a IOS style button",
+                  "Creates an iOS-style button with a tinted background.",
+                );
+              },
             ),
           ],
         ),

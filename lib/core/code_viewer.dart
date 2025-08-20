@@ -9,6 +9,7 @@ Future<void> showCodeSheet(
   String? sourceCode,
   String? sourceAssets,
 }) async {
+  debugPrint("Current sourceCode: $sourceCode");
   String content = sourceCode ?? "";
   if (content.isEmpty && sourceAssets != null) {
     try {
@@ -58,18 +59,27 @@ Future<void> showCodeSheet(
                         icon: const Icon(Icons.copy),
                       ),
                       const SizedBox(height: 8),
-                      Expanded(
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        // width: 200,
                         child: SingleChildScrollView(
                           controller: controller,
-                          child: HighlightView(
-                            content,
-                            language: 'dart',
-                            theme: githubTheme,
-                            padding: const EdgeInsets.all(8),
-                            textStyle: const TextStyle(
-                              fontFamily: 'monospace',
-                              fontSize: 13,
-                            ),
+                          child: Wrap(
+                            children: [
+                              ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                ),
+                                child: HighlightView(
+                                  content,
+                                  language: 'dart',
+                                  theme: githubTheme,
+                                  padding: const EdgeInsets.all(8),
+                                  textStyle: const TextStyle(fontSize: 13),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

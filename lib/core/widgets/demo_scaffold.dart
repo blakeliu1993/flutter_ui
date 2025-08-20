@@ -17,6 +17,7 @@ class DemoScaffold extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    debugPrint("Current sourceCode2 : $sourceCode");
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

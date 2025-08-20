@@ -10,6 +10,11 @@ command : flutter create --org com.future --description "Flutter Future UI Show"
 
 ## Dev record
 20250813 : Create project , 70% buttons is created.
+20250814 : 100% buttons are created. Try some glass effect seems like frost glass is stable.
+20250815 : 100% Text is finished , but selectedtext has a flutter version issue on ios . also code viewer is pretty no code to show.
+20250820 : Trying Chip designed. 100%
+ 
+
 
 ## AI Plan
 总体思路（只做 Android 包，能浏览组件 + 一键看源码）
